@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+}
+.main {
+  display: flex;
+}
+.editor {
+  width: 50%;
+}
+
+.markdown {
+  width: 50%;
+  border: 1px solid #aaaaaa;
+  padding: 20px;
+  overflow: scroll;
+  background-color: white;
+}
