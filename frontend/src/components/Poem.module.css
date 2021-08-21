@@ -1,0 +1,92 @@
+.container {
+  position: relative;
+  padding-bottom: 90px;
+  margin-bottom: 100px;
+}
+.container::after {
+  content: "";
+  height: 1px;
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -25px;
+  background: rgba(51, 51, 51, 0.4);
+}
+.heading {
+  position: relative;
+  z-index: 2;
+}
+.coverLetter {
+  font-size: 260px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: rgba(0, 0, 0, 0.07);
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: -80px;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  -moz-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+.title {
+  font-size: 48px;
+  font-weight: 600;
+  transition: color 0.1s linear;
+}
+.title:hover {
+  color: #c62641;
+}
+.author {
+  color: #888888;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+.main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.vote {
+  background-color: white;
+  color: #c62641;
+  border-radius: 4px;
+  transition: all 0.2s linear;
+  font-size: 25px;
+  margin-right: 25px;
+}
+.vote p {
+  margin: 0;
+  text-align: center;
+}
+.upVote,
+.downVote {
+  color: #888888;
+  font-size: 35px;
+  text-align: center;
+  cursor: pointer;
+}
+.upVote:hover,
+.downVote:hover {
+  color: #c62641;
+}
+.content {
+  font-size: 18px;
+}
+
+.readOn {
+  padding: 7px 35px;
+  background-color: #c62641;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  transition: all 0.2s linear;
+}
+.readOn:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

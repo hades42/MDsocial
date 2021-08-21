@@ -1,0 +1,28 @@
+.header {
+  position: -webkit-sticky;
+  position: sticky;
+  color: white;
+  background-color: #c62641;
+  top: -1px;
+  z-index: 2000;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+.addPoem {
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s linear;
+  padding: 0 1rem;
+}
+.addPoem:hover {
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.addPoem h5 {
+  margin: 0;
+  padding: 0;
+}
