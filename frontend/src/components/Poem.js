@@ -1,7 +1,12 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import classes from "./Poem.module.css";
 
 const Poem = ({ poem }) => {
+  let content = poem.text;
+  if (poem.text.length > 400) {
+    content = content.substring(0, 400) + "...";
+  }
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
@@ -9,7 +14,7 @@ const Poem = ({ poem }) => {
         <div className={classes.author}>
           <p>By {poem.author}</p>
         </div>
-        <div className={classes.coverLetter}>K</div>
+        <div className={classes.coverLetter}>{poem.title[0]}</div>
       </div>
       <div className={classes.main}>
         <div className={classes.vote}>
@@ -21,15 +26,10 @@ const Poem = ({ poem }) => {
             <i className="fas fa-chevron-down"></i>
           </div>
         </div>
-        <div className={classes.content}>
-          Credibly customize visionary niches before alternative services.
-          Compellingly restore effective total linkage with sticky resources.
-          Appropriately reconceptualize multifunctional leadership skills
-          without turnkey outsourcing. Continually restore cross functional
-          results through transparent models. Phosfluorescently seize 2.0
-          leadership for viral content. Dynamically disseminate customer
-          directed...
-        </div>
+        <ReactMarkdown
+          children={content}
+          className={classes.content}
+        ></ReactMarkdown>
       </div>
       <div className={classes.footer}>
         <button className={classes.readOn}>Read On</button>
