@@ -1,16 +1,20 @@
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { Container } from "react-bootstrap";
 import HomeScreen from "./screens/HomeScreen";
+import SinglePoem from "./screens/SinglePoem";
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <main>
-        <HomeScreen></HomeScreen>
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <main>
+          <Route path="/poem/:id" component={SinglePoem}></Route>
+          <Route path="/" component={HomeScreen} exact></Route>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
