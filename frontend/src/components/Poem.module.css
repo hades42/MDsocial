@@ -38,6 +38,8 @@
   font-size: 48px;
   font-weight: 600;
   transition: color 0.1s linear;
+  text-decoration: none;
+  color: black;
 }
 .title:hover {
   color: #c62641;
@@ -80,13 +82,16 @@
 }
 
 .readOn {
-  padding: 7px 35px;
+  margin-left: 50px;
+  padding: 13px 35px;
   background-color: #c62641;
   border-radius: 3px;
   border: none;
   color: white;
   transition: all 0.2s linear;
+  text-decoration: none;
 }
 .readOn:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: white;
 }

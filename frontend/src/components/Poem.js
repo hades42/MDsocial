@@ -1,5 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { Link } from "react-router-dom";
 import classes from "./Poem.module.css";
 
 const Poem = ({ poem }) => {
@@ -10,7 +11,9 @@ const Poem = ({ poem }) => {
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
-        <h2 className={classes.title}>{poem.title}</h2>
+        <Link to={`/poem/${poem.id}`} className={classes.title}>
+          {poem.title}
+        </Link>
         <div className={classes.author}>
           <p>By {poem.author}</p>
         </div>
@@ -32,7 +35,9 @@ const Poem = ({ poem }) => {
         ></ReactMarkdown>
       </div>
       <div className={classes.footer}>
-        <button className={classes.readOn}>Read On</button>
+        <Link to={`/poem/${poem.id}`} className={classes.readOn}>
+          Read On
+        </Link>
       </div>
     </div>
   );
