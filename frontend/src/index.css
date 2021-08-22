@@ -30,3 +30,16 @@ footer {
 .padUp {
   padding: 25px;
 }
+table,
+th,
+td {
+  border: 1px solid black;
+}
+th,
+td {
+  text-align: center !important;
+}
+
+.CodeMirror {
+  height: 100vh !important;
+}
