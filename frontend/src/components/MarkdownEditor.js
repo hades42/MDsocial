@@ -64,7 +64,9 @@ const MarkdownEditor = (props) => {
               onChange={(e) => setFont(e.target.value)}
             >
               {fontSizeMain.map((f) => (
-                <option value={f}>{f}px</option>
+                <option key={f} value={f}>
+                  {f}px
+                </option>
               ))}
             </select>
           </div>
@@ -77,7 +79,9 @@ const MarkdownEditor = (props) => {
               onChange={(e) => setTheme(e.target.value)}
             >
               {themeMain.map((theme) => (
-                <option value={theme}>{theme}</option>
+                <option key={theme} value={theme}>
+                  {theme}
+                </option>
               ))}
             </select>
           </div>
@@ -90,7 +94,9 @@ const MarkdownEditor = (props) => {
               onChange={(e) => setKeybinding(e.target.value)}
             >
               {keybindMain.map((key) => (
-                <option value={key}>{key}</option>
+                <option key={key} value={key}>
+                  {key}
+                </option>
               ))}
             </select>
           </div>
