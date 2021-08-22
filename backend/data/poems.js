@@ -56,7 +56,6 @@ let poems = [
 
 const findPostById = (id) => {
   const found = poems.find((p) => p.id === +id);
-  console.log(found);
   return found;
 };
 
