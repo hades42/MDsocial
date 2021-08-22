@@ -11,7 +11,7 @@ function App() {
         <Header />
         <main>
           <Route path="/createPoem" component={CreatingNewPoem}></Route>
-          <Route path="/poem/:id" component={SinglePoem}></Route>
+          <Route path="/poems/:id" component={SinglePoem}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <Footer />
