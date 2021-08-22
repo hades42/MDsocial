@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import classes from "./Poem.module.css";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Message from "./Message";
 
 const Poem = ({ poem }) => {
   const components = {
@@ -29,6 +31,40 @@ const Poem = ({ poem }) => {
   if (poem.text.length > 400) {
     content = content.substring(0, 400) + "...";
   }
+
+  const [currentVote, setCurrentVote] = useState(poem.votes);
+  const [error, setError] = useState("");
+  const upVoteHandler = () => {
+    const upVote = async () => {
+      try {
+        const { data } = await axios.put(`/api/poems/${poem.id}/upvote`);
+        setCurrentVote(data.votes);
+      } catch (error) {
+        setError(
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        );
+      }
+    };
+    upVote();
+  };
+
+  const downVoteHandler = () => {
+    const downVote = async () => {
+      try {
+        const { data } = await axios.put(`/api/poems/${poem.id}/devote`);
+        setCurrentVote(data.votes);
+      } catch (error) {
+        setError(
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        );
+      }
+    };
+    downVote();
+  };
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
@@ -42,11 +78,11 @@ const Poem = ({ poem }) => {
       </div>
       <div className={classes.main}>
         <div className={classes.vote}>
-          <div className={classes.upVote}>
+          <div onClick={upVoteHandler} className={classes.upVote}>
             <i className="fas fa-chevron-up"></i>
           </div>
-          <p>{poem.votes}</p>
-          <div className={classes.downVote}>
+          <p>{currentVote}</p>
+          <div onClick={downVoteHandler} className={classes.downVote}>
             <i className="fas fa-chevron-down"></i>
           </div>
         </div>
@@ -62,6 +98,7 @@ const Poem = ({ poem }) => {
           Read On
         </Link>
       </div>
+      {error && <Message variant="danger">{error}</Message>}
     </div>
   );
 };

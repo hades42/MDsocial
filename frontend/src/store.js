@@ -1,10 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { poemListReducer } from "./reducers/poemReducer";
+import {
+  getSinglePoemVotes,
+  poemListReducer,
+  singlePoemReducer,
+} from "./reducers/poemReducer";
 
 const reducer = combineReducers({
   poemList: poemListReducer,
+  singlePoem: singlePoemReducer,
+  singleVotes: getSinglePoemVotes,
 });
 
 const initialState = {};
