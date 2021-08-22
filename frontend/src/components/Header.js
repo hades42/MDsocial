@@ -11,7 +11,9 @@ const Header = () => {
           </Link>
         </div>
         <div className={classes.addPoem}>
-          <h5>Add new Poem</h5>
+          <Link classes={classes.link} to={"/createPoem"}>
+            Add new Poem
+          </Link>
         </div>
       </div>
     </header>

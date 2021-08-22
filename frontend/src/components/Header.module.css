@@ -8,6 +8,7 @@
 }
 .container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 .addPoem {
@@ -16,15 +17,19 @@
   display: flex;
   align-items: center;
   transition: all 0.2s linear;
-  padding: 0 1rem;
+  padding: 1rem 1.5rem;
+  font-size: 19px;
 }
 .addPoem:hover {
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.2);
 }
-.addPoem h5 {
-  margin: 0;
-  padding: 0;
+.addPoem a {
+  text-decoration: none;
+  color: white;
+}
+.addPoem a:hover {
+  color: white;
 }
 .logo {
   text-decoration: none;
