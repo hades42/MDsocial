@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Poem from "./Poem";
 import axios from "axios";
 import classes from "./MainSection.module.css";
+import { listPoems } from "../actions/poemActions";
+import Loader from "./Loader";
+import Message from "./Message";
+
 const MainSection = () => {
-  const [listPoem, setListPoem] = useState([]);
+  const dispatch = useDispatch();
+  const poemList = useSelector((state) => state.poemList);
+  const { loading, error, poems } = poemList;
+
   useEffect(() => {
-    const fetchData = async () => {
-      const config = {
-        headers: {
-          bob: "Bobalooba",
-        },
-      };
-      const { data } = await axios.get(
-        "https://shielded-spire-87442.herokuapp.com/api/poems",
-        config
-      );
-      console.log(data);
-      setListPoem(data);
-    };
-    fetchData();
-  }, []);
+    dispatch(listPoems());
+  }, [dispatch]);
+
+  const listPoem = [];
+
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
         <h3>Latest stories</h3>
       </div>
-      <div className={classes.content}>
-        {listPoem.map((p) => (
-          <Poem key={p.id} poem={p}></Poem>
-        ))}
-      </div>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <div className={classes.content}>
+          {poems.map((p) => (
+            <Poem key={p.id} poem={p}></Poem>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
