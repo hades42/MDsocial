@@ -10,6 +10,7 @@
 
 .markdown {
   width: 50%;
+  height: 100vh;
   border: 1px solid #aaaaaa;
   padding: 20px;
   overflow: scroll;
