@@ -18,7 +18,13 @@ import { Controlled as ControlledEditor } from "react-codemirror2";
 
 const MarkdownEditor = (props) => {
   const fontSizeMain = [16, 18, 22, 24, 28];
-  const themeMain = ["nord", "solarized", "gruvbox-dark", "monokai"];
+  const themeMain = [
+    "nord",
+    "solarized light",
+    "solarized dark",
+    "gruvbox-dark",
+    "monokai",
+  ];
   const keybindMain = ["vim", "sublime", "emacs"];
   const [font, setFont] = useState(16);
   const [theme, setTheme] = useState("nord");

@@ -15,3 +15,41 @@
   overflow: scroll;
   background-color: white;
 }
+
+.controlMain {
+  display: flex;
+  font-size: 16px;
+  background-color: white;
+  padding: 13px 10px;
+  color: #aaaaaa;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.option {
+  margin-right: 20px;
+}
+.option label {
+  margin-right: 10px;
+}
+.option select {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-top-width: 1.02px;
+  border-radius: 4px;
+  outline: none;
+  -webkit-transition: all 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 7px 13px;
+  cursor: pointer;
+}
+.option select:hover {
+  border: 1px solid black;
+}
