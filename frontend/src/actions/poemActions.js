@@ -14,10 +14,20 @@ import {
   ADD_POEM_FAIL,
 } from "../constants/poemConstant";
 
+const filterDate = (date) => {
+  return date.substring(0, 10);
+};
+const sortDate = (a, b) => {
+  const dateA = new Date(a.createdAt).getTime();
+  const dateB = new Date(b.createdAt).getTime();
+  return dateB - dateA;
+};
+
 export const listPoems = () => async (dispatch) => {
   try {
     dispatch({ type: POEM_LIST_REQUEST });
     const { data } = await axios.get("/api/poems");
+    data.sort(sortDate);
     dispatch({ type: POEM_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -33,7 +43,10 @@ export const listPoems = () => async (dispatch) => {
 export const getSinglePoem = (poemId) => async (dispatch) => {
   try {
     dispatch({ type: SINGLE_POEM_REQUEST });
-    const { data } = await axios.get(`/api/poems/${poemId}`);
+    const response = await axios.get(`/api/poems/${poemId}`);
+    const data = response.data;
+    const date = data.createdAt;
+    data.createdAt = filterDate(date);
     dispatch({
       type: SINGLE_POEM_SUCCESS,
       payload: data,
