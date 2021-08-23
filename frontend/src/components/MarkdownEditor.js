@@ -29,9 +29,18 @@ const MarkdownEditor = (props) => {
   const [font, setFont] = useState(16);
   const [theme, setTheme] = useState("nord");
   const [keybinding, setKeybinding] = useState("sublime");
+  const [lineWrap, setLineWrap] = useState(true);
   const { text, onChange } = props;
   const changeHandler = (editor, data, value) => {
     onChange(value);
+  };
+  const setLineWrapHandler = (value) => {
+    let updatedValue = value;
+
+    if (updatedValue === "true" || updatedValue === "false") {
+      updatedValue = JSON.parse(updatedValue);
+    }
+    setLineWrap(updatedValue);
   };
 
   const components = {
@@ -100,6 +109,23 @@ const MarkdownEditor = (props) => {
               ))}
             </select>
           </div>
+
+          <div className={classes.option}>
+            <label htmlFor="font">Line Wrap</label>
+            <select
+              id="linewrap"
+              value={lineWrap}
+              onChange={(e) => setLineWrapHandler(e.target.value)}
+            >
+              <option key="true" value={true}>
+                true
+              </option>
+
+              <option key="false" value={false}>
+                false
+              </option>
+            </select>
+          </div>
         </div>
       </div>
       <div className={classes.main} style={{ fontSize: `${font}px` }}>
@@ -108,7 +134,7 @@ const MarkdownEditor = (props) => {
           value={text}
           className={classes.editor}
           options={{
-            lineWrapping: true,
+            lineWrapping: lineWrap,
             lint: true,
             mode: "markdown",
             theme: theme,
