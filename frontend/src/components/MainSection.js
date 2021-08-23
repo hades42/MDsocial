@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Poem from "./Poem";
-import axios from "axios";
 import classes from "./MainSection.module.css";
 import { listPoems } from "../actions/poemActions";
 import Loader from "./Loader";
@@ -15,8 +14,6 @@ const MainSection = () => {
   useEffect(() => {
     dispatch(listPoems());
   }, [dispatch]);
-
-  const listPoem = [];
 
   return (
     <div className={classes.container}>
