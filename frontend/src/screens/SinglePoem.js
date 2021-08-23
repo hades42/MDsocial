@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { filterDate } from "../utils/tools";
 import {
   getSinglePoem,
   upVoteSinglePoem,
@@ -102,7 +103,9 @@ const SinglePoem = ({ match }) => {
                 <div className={classes.heading}>
                   <h3 className={classes.title}>{poem.title}</h3>
                   <div className={classes.author}>
-                    <p>By {poem.author}</p>
+                    <p>
+                      By {poem.author} / {filterDate(poem.createdAt)}
+                    </p>
                   </div>
                   {poem.title ? (
                     <div className={classes.coverLetter}>{poem.title[0]}</div>

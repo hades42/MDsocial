@@ -65,6 +65,9 @@ const Poem = ({ poem }) => {
     };
     downVote();
   };
+  const filterData = (date) => {
+    return date.substring(0, 10);
+  };
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
@@ -72,7 +75,9 @@ const Poem = ({ poem }) => {
           {poem.title}
         </Link>
         <div className={classes.author}>
-          <p>By {poem.author}</p>
+          <p>
+            By {poem.author} / {filterData(poem.createdAt)}
+          </p>
         </div>
         <div className={classes.coverLetter}>{poem.title[0]}</div>
       </div>
