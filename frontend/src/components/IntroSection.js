@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "./IntroSection.module.css";
 
 const IntroSection = () => {
@@ -11,7 +12,9 @@ const IntroSection = () => {
           <h2>Introduction to Markdown</h2>
         </div>
         <div className={`${classes.sectionAuthor}`}>By Van Nguyen</div>
-        <div className={`${classes.readingBtn}`}>Read On</div>
+        <Link to={`/poems/0`} className={`${classes.readingBtn}`}>
+          Read On
+        </Link>
       </div>
     </section>
   );

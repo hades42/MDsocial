@@ -56,7 +56,9 @@
   border-radius: 2px;
   transition: all 0.2s linear;
   cursor: pointer;
+  text-decoration: none;
 }
 .readingBtn:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: #c62641;
 }
