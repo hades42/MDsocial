@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import MarkdownEditor from "../components/MarkdownEditor";
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./SinglePoem.module.css";
 import ReactMarkdown from "react-markdown";
@@ -35,6 +36,7 @@ const SinglePoem = ({ match }) => {
   };
 
   const poemId = match.params.id;
+  const [previewMarkdown, setPreviewMarkdown] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSinglePoem(poemId));
@@ -46,6 +48,8 @@ const SinglePoem = ({ match }) => {
   const singleVotes = useSelector((state) => state.singleVotes);
   const { votes, error: errorVote } = singleVotes;
 
+  const [text, setText] = useState(poem.text);
+
   const upVoteHandler = () => {
     dispatch(upVoteSinglePoem(poemId));
   };
@@ -56,6 +60,13 @@ const SinglePoem = ({ match }) => {
     alert(errorVote);
   }
 
+  const previewHandler = () => {
+    setPreviewMarkdown((prevState) => !prevState);
+  };
+  const onChange = (value) => {
+    setText(value);
+  };
+
   return (
     <>
       {loading ? (
@@ -65,44 +76,56 @@ const SinglePoem = ({ match }) => {
       ) : (
         <>
           <div className={classes.space}></div>
-          <div className={classes.wrapper}>
-            <div className={classes.container}>
-              <div className={classes.vote}>
-                <div onClick={upVoteHandler} className={classes.upVote}>
-                  <i className="fas fa-chevron-up"></i>
+          <button className={classes.previewBtn} onClick={previewHandler}>
+            Preview
+          </button>
+          {previewMarkdown ? (
+            <div className={classes.editor}>
+              <MarkdownEditor
+                text={poem.text}
+                onChange={onChange}
+              ></MarkdownEditor>
+            </div>
+          ) : (
+            <div className={classes.wrapper}>
+              <div className={classes.container}>
+                <div className={classes.vote}>
+                  <div onClick={upVoteHandler} className={classes.upVote}>
+                    <i className="fas fa-chevron-up"></i>
+                  </div>
+                  <p>{votes}</p>
+                  <div onClick={downVoteHandler} className={classes.downVote}>
+                    <i className="fas fa-chevron-down"></i>
+                  </div>
                 </div>
-                <p>{votes}</p>
-                <div onClick={downVoteHandler} className={classes.downVote}>
-                  <i className="fas fa-chevron-down"></i>
-                </div>
-              </div>
 
-              <div className={classes.heading}>
-                <h3 className={classes.title}>{poem.title}</h3>
-                <div className={classes.author}>
-                  <p>By {poem.author}</p>
+                <div className={classes.heading}>
+                  <h3 className={classes.title}>{poem.title}</h3>
+                  <div className={classes.author}>
+                    <p>By {poem.author}</p>
+                  </div>
+                  {poem.title ? (
+                    <div className={classes.coverLetter}>{poem.title[0]}</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
-                {poem.title ? (
-                  <div className={classes.coverLetter}>{poem.title[0]}</div>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className={classes.main}>
-                <ReactMarkdown
-                  components={components}
-                  remarkPlugins={[remarkGfm]}
-                  children={poem.text}
-                  className={classes.content}
-                ></ReactMarkdown>
-              </div>
-              <div className={classes.footer}>
-                <button onClick={upVoteHandler} className={classes.voteBtn}>
-                  Vote
-                </button>
+                <div className={classes.main}>
+                  <ReactMarkdown
+                    components={components}
+                    remarkPlugins={[remarkGfm]}
+                    children={poem.text}
+                    className={classes.content}
+                  ></ReactMarkdown>
+                </div>
+                <div className={classes.footer}>
+                  <button onClick={upVoteHandler} className={classes.voteBtn}>
+                    Vote
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </>
