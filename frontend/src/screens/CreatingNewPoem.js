@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import classes from "./CreatingNewPoem.module.css";
 import MarkdownEditor from "../components/MarkdownEditor";
@@ -5,10 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { addNewPoem } from "../actions/poemActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+
 const CreatingNewPoem = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
+  const [imageLink, setImageLink] = useState("");
+  const [uploading, setUploading] = useState(false);
+
   const onChange = (value) => {
     setText(value);
   };
@@ -36,12 +41,32 @@ const CreatingNewPoem = () => {
     };
     dispatch(addNewPoem(formData));
   };
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/upload", formData, config);
+      setImageLink(data);
+      setUploading(false);
+    } catch (error) {
+      console.log(error);
+      setUploading(false);
+    }
+  };
+  const copyClibBoard = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(imageLink);
+  };
   return (
     <>
-      {loading && <Loader></Loader>}
-      {error && <Message variant="danger">{error}</Message>}
-      {data && <Message variant="success">{data.message}</Message>}
-      <form className={classes.form} onSubmit={submitHandler}>
+      <form className={classes.form}>
         <div className={classes.box}>
           <div className={classes.title}>
             <label htmlFor="title">Title of poem</label>
@@ -61,10 +86,44 @@ const CreatingNewPoem = () => {
               id="author"
             ></input>
           </div>
-          <button type="submit" className={classes.submit}>
+          {uploading && <Loader></Loader>}
+          <button
+            type="submit"
+            name="submitBtn"
+            className={classes.submit}
+            onClick={submitHandler}
+          >
             Submit
           </button>
         </div>
+        <div className={classes.secondRow}>
+          <div className={classes.upload}>
+            <label htmlFor="myfile">Upload your Image: </label>
+            <input
+              className="form-control"
+              type="file"
+              id="myfile"
+              name="myfile"
+              onChange={uploadFileHandler}
+              aria-describedby="inputGroupFileAddon04"
+              aria-label="Upload"
+            />
+          </div>
+          <div className={classes.linkUpload}>
+            <input
+              className={classes.getLink}
+              type="text"
+              value={imageLink}
+              onChange={(e) => setImageLink(e.target.value)}
+            ></input>
+            <button className={classes.copy} onClick={copyClibBoard}>
+              Copy
+            </button>
+          </div>
+        </div>
+        {loading && <Loader></Loader>}
+        {error && <Message variant="danger">{error}</Message>}
+        {data && <Message variant="success">{data.message}</Message>}
         <MarkdownEditor text={text} onChange={onChange}></MarkdownEditor>
       </form>
     </>
