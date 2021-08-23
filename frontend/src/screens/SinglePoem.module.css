@@ -111,6 +111,7 @@
   margin-bottom: 2rem;
 }
 .previewBtn {
+  position: fixed;
   background-color: #c62641;
   color: white;
   border: none;
@@ -119,7 +120,18 @@
   border: 1px solid white;
   transition: all 0.2s linear;
 }
-.previewBtn:hover {
+
+.previewBtn2 {
+  background-color: #c62641;
+  color: white;
+  border: none;
+  margin: 1rem;
+  padding: 0.5rem 2rem;
+  border: 1px solid white;
+  transition: all 0.2s linear;
+}
+.previewBtn:hover,
+.previewBtn2:hover {
   background-color: white;
   color: #c62641;
   border: 1px solid #c62641;
