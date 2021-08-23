@@ -5,12 +5,14 @@ import {
   getSinglePoemVotes,
   poemListReducer,
   singlePoemReducer,
+  addNewPoemReducer,
 } from "./reducers/poemReducer";
 
 const reducer = combineReducers({
   poemList: poemListReducer,
   singlePoem: singlePoemReducer,
   singleVotes: getSinglePoemVotes,
+  addPoem: addNewPoemReducer,
 });
 
 const initialState = {};
