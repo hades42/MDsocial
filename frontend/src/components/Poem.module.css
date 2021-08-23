@@ -78,8 +78,17 @@
   color: #c62641;
 }
 .content {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
   font-size: 18px;
-  overflow-y: scroll;
+}
+.content img {
+  max-width: 100%;
+}
+.content h1,
+.content h2 {
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid #eaecef;
 }
 
 .readOn {

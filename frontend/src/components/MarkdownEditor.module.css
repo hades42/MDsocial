@@ -23,7 +23,9 @@
   padding-bottom: 0.3em;
   border-bottom: 2px solid #eaecef;
 }
-
+.markdown img {
+  max-width: 100%;
+}
 .controlMain {
   display: flex;
   font-size: 16px;
