@@ -37,7 +37,16 @@ const Poem = ({ poem }) => {
   const upVoteHandler = () => {
     const upVote = async () => {
       try {
-        const { data } = await axios.put(`/api/poems/${poem.id}/upvote`);
+        const config = {
+          headers: {
+            bob: "Bobalooba",
+          },
+        };
+        const { data } = await axios.put(
+          `/api/poems/${poem.id}/upvote`,
+          {},
+          config
+        );
         setCurrentVote(data.votes);
       } catch (error) {
         setError(
@@ -53,7 +62,16 @@ const Poem = ({ poem }) => {
   const downVoteHandler = () => {
     const downVote = async () => {
       try {
-        const { data } = await axios.put(`/api/poems/${poem.id}/devote`);
+        const config = {
+          headers: {
+            bob: "Bobalooba",
+          },
+        };
+        const { data } = await axios.put(
+          `/api/poems/${poem.id}/devote`,
+          {},
+          config
+        );
         setCurrentVote(data.votes);
       } catch (error) {
         setError(

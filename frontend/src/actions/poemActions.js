@@ -26,7 +26,12 @@ const sortDate = (a, b) => {
 export const listPoems = () => async (dispatch) => {
   try {
     dispatch({ type: POEM_LIST_REQUEST });
-    const { data } = await axios.get("/api/poems");
+    const config = {
+      headers: {
+        bob: "Bobalooba",
+      },
+    };
+    const { data } = await axios.get("/api/poems", config);
     data.sort(sortDate);
     dispatch({ type: POEM_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -43,7 +48,13 @@ export const listPoems = () => async (dispatch) => {
 export const getSinglePoem = (poemId) => async (dispatch) => {
   try {
     dispatch({ type: SINGLE_POEM_REQUEST });
-    const response = await axios.get(`/api/poems/${poemId}`);
+
+    const config = {
+      headers: {
+        bob: "Bobalooba",
+      },
+    };
+    const response = await axios.get(`/api/poems/${poemId}`, config);
     const data = response.data;
     const date = data.createdAt;
     data.createdAt = filterDate(date);
