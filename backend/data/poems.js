@@ -77,5 +77,10 @@ const deVoteById = (id) => {
   }
 };
 
+const createNewData = (data) => {
+  poems.push(data);
+  return data;
+};
+
 export default poems;
-export { findPostById, upVoteById, deVoteById };
+export { findPostById, upVoteById, deVoteById, createNewData };
