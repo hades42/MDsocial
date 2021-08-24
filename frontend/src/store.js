@@ -6,6 +6,7 @@ import {
   poemListReducer,
   singlePoemReducer,
   addNewPoemReducer,
+  addNewCommentReducer,
 } from "./reducers/poemReducer";
 import { userLoginReducer, userRegisterReducer } from "./reducers/userReducer";
 
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   addPoem: addNewPoemReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  addNewComment: addNewCommentReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

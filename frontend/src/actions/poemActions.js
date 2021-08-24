@@ -12,6 +12,9 @@ import {
   ADD_POEM_REQUEST,
   ADD_POEM_SUCCESS,
   ADD_POEM_FAIL,
+  POEM_CREATE_COMMENT_REQUEST,
+  POEM_CREATE_COMMENT_SUCCESS,
+  POEM_CREATE_COMMENT_FAIL,
 } from "../constants/poemConstant";
 
 const filterDate = (date) => {
@@ -161,3 +164,36 @@ export const addNewPoem = (poemData) => async (dispatch, getState) => {
     });
   }
 };
+
+export const createNewComment =
+  (poemId, comment) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: POEM_CREATE_COMMENT_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      await axios.post(`/api/poems/${poemId}/comment`, comment, config);
+      dispatch({
+        type: POEM_CREATE_COMMENT_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: POEM_CREATE_COMMENT_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
