@@ -27,14 +27,21 @@ const Header = () => {
             </Link>
           </div>
           {userInfo ? (
-            <NavDropdown title={userInfo.name} id="username">
-              <NavDropdown.Item onClick={logoutHandler}>
+            <NavDropdown
+              className={classes.dropdown}
+              title={userInfo.name}
+              id="username"
+            >
+              <NavDropdown.Item
+                className={classes.dropdownLink}
+                onClick={logoutHandler}
+              >
                 Log out
               </NavDropdown.Item>
             </NavDropdown>
           ) : (
             <div className={classes.signIn}>
-              <Link classes={classes.signIn} to={"/login"}>
+              <Link className={classes.signInLink} to={"/login"}>
                 Sign In
               </Link>
             </div>
