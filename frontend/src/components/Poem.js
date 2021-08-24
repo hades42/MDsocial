@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Message from "./Message";
+import { useSelector } from "react-redux";
 
 const Poem = ({ poem }) => {
   const components = {
@@ -34,12 +35,17 @@ const Poem = ({ poem }) => {
 
   const [currentVote, setCurrentVote] = useState(poem.votes);
   const [error, setError] = useState("");
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const upVoteHandler = () => {
     const upVote = async () => {
       try {
         const config = {
           headers: {
             bob: "Bobalooba",
+            Authorization: `${userInfo ? `Bearer ${userInfo.token}` : null}`,
           },
         };
         const { data } = await axios.put(
@@ -65,6 +71,7 @@ const Poem = ({ poem }) => {
         const config = {
           headers: {
             bob: "Bobalooba",
+            Authorization: `${userInfo ? `Bearer ${userInfo.token}` : null}`,
           },
         };
         const { data } = await axios.put(
