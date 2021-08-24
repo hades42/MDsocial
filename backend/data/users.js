@@ -34,5 +34,14 @@ const findUserByEmail = (email) => {
   return users.find((u) => u.email === email);
 };
 
+const findUserById = (id) => {
+  return users.find((u) => u.id === id);
+};
+
+const createNewUser = (data) => {
+  users.push(data);
+  return data;
+};
+
 export default users;
-export { findUserByEmail, matchPassword };
+export { createNewUser, findUserByEmail, matchPassword, findUserById };
