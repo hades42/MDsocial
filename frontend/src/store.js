@@ -7,7 +7,7 @@ import {
   singlePoemReducer,
   addNewPoemReducer,
 } from "./reducers/poemReducer";
-import { userLoginReducer } from "./reducers/userReducer";
+import { userLoginReducer, userRegisterReducer } from "./reducers/userReducer";
 
 const reducer = combineReducers({
   poemList: poemListReducer,
@@ -15,6 +15,7 @@ const reducer = combineReducers({
   singleVotes: getSinglePoemVotes,
   addPoem: addNewPoemReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
