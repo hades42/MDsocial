@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
-import users, { findUserById } from "../data/users.js";
+import { findUserById } from "../data/users.js";
 
 const headerProtect = (req, res, next) => {
   if (req.headers["bob"] === "Bobalooba") {

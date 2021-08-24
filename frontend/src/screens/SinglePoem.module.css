@@ -102,12 +102,20 @@
   padding: 8px 35px;
   background-color: #c62641;
   border-radius: 3px;
-  border: none;
+  border: 1px solid white;
   color: white;
   transition: all 0.2s linear;
   text-decoration: none;
 }
+.voteBtn:hover {
+  color: #c62641;
+  background-color: white;
+  border: 1px solid #c62641;
+}
 .editor {
+  margin-bottom: 2rem;
+}
+.btnContainer {
   margin-bottom: 2rem;
 }
 .previewBtn {
@@ -119,6 +127,7 @@
   padding: 0.5rem 2rem;
   border: 1px solid white;
   transition: all 0.2s linear;
+  z-index: 101;
 }
 
 .previewBtn2 {
@@ -135,4 +144,10 @@
   background-color: white;
   color: #c62641;
   border: 1px solid #c62641;
+}
+.footer {
+  width: 100%;
+}
+.fixing {
+  margin-left: 2rem;
 }

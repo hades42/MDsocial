@@ -1,0 +1,18 @@
+.textComment {
+  font-size: 20px;
+  height: 200px;
+  margin-bottom: 1rem;
+}
+.submit {
+  color: white;
+  background-color: #c62641;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid white;
+  border-radius: 4px;
+  transition: all 0.1s linear;
+}
+.submit:hover {
+  background-color: white;
+  border: 1px solid #c62641;
+  color: #c62641;
+}
