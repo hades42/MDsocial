@@ -104,6 +104,7 @@ const addCommentById = asyncHandler((req, res) => {
       throw new Error("Invalid data");
     } else {
       const createdComment = {
+        id: uuidv4(),
         userId,
         name,
         text,
