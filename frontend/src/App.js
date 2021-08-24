@@ -5,7 +5,6 @@ import HomeScreen from "./screens/HomeScreen";
 import SinglePoem from "./screens/SinglePoem";
 import CreatingNewPoem from "./screens/CreatingNewPoem";
 function App() {
-  console.log("testing");
   return (
     <Router>
       <div className="App">
