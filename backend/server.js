@@ -1,6 +1,7 @@
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
+import morgan from "morgan";
 
 import poemRoutes from "./routes/poemRoutes.js";
 import uploadRoutes from "./routes/uploadRoute.js";
@@ -10,6 +11,10 @@ import { notFound, errorHandler } from "./middleWare/errorMiddleWare.js";
 dotenv.config();
 
 const app = express();
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 app.use(express.json());
 
