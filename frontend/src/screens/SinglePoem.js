@@ -14,6 +14,7 @@ import {
 } from "../actions/poemActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Comment from "../components/Comment";
 
 const SinglePoem = ({ match }) => {
   const components = {
@@ -50,6 +51,7 @@ const SinglePoem = ({ match }) => {
 
   // eslint-disable-next-line
   const [text, setText] = useState("");
+  const [toggleComment, setToggleComment] = useState(false);
 
   const upVoteHandler = () => {
     dispatch(upVoteSinglePoem(poemId));
@@ -66,6 +68,10 @@ const SinglePoem = ({ match }) => {
   };
   const onChange = (value) => {
     setText(value);
+  };
+
+  const toggleCommentBox = () => {
+    setToggleComment((prevState) => !prevState);
   };
 
   return (
@@ -128,9 +134,25 @@ const SinglePoem = ({ match }) => {
                     ></ReactMarkdown>
                   </div>
                   <div className={classes.footer}>
-                    <button onClick={upVoteHandler} className={classes.voteBtn}>
-                      Vote
-                    </button>
+                    <div className={classes.btnContainer}>
+                      <button
+                        onClick={upVoteHandler}
+                        className={classes.voteBtn}
+                      >
+                        Vote
+                      </button>
+                      <button
+                        onClick={toggleCommentBox}
+                        className={classes.voteBtn + " " + classes.fixing}
+                      >
+                        Comment
+                      </button>
+                    </div>
+                    {toggleComment ? (
+                      <Comment poemData={poem} poemId={poemId}></Comment>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </div>
