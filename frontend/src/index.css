@@ -43,3 +43,9 @@ td {
 .CodeMirror {
   height: 100vh !important;
 }
+.dropdown-toggle {
+  color: white !important;
+}
+.dropdown-item {
+  color: black !important;
+}

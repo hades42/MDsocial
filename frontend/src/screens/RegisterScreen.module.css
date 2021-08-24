@@ -1,0 +1,34 @@
+.space {
+  height: 60px;
+  background-color: #c62641;
+}
+
+.wrapper {
+  box-shadow: 0 30px 50px 0 rgb(1 1 1 / 15%);
+  max-width: 900px;
+  margin: 0 auto 10rem;
+  width: 95%;
+  padding: 7rem 0 8rem;
+  top: -7rem;
+  position: relative;
+  z-index: 100;
+  margin-bottom: 0;
+  background-color: white;
+  border-radius: 3px;
+}
+.register {
+  background-color: #c62641;
+  border: 1px solid white;
+  color: white;
+  padding: 0.4rem 2rem;
+  border-radius: 4px;
+  transition: all 0.1s linear;
+}
+.register:hover {
+  background-color: white;
+  color: #c62641;
+  border: 1px solid #c62641;
+}
+.toLogin {
+  color: #c62641;
+}

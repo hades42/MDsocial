@@ -39,3 +39,19 @@
 .logo:hover {
   color: white;
 }
+.rightSide {
+  display: flex;
+  align-items: center;
+}
+.signInLink {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  padding: 0.7rem 1.5rem;
+  transition: all 0.2s linear;
+}
+.signInLink:hover {
+  color: white;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+}

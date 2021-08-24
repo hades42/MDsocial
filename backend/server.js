@@ -1,8 +1,10 @@
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
+
 import poemRoutes from "./routes/poemRoutes.js";
 import uploadRoutes from "./routes/uploadRoute.js";
+import userRoutes from "./routes/userRoutes.js";
 
 import { notFound, errorHandler } from "./middleWare/errorMiddleWare.js";
 dotenv.config();
@@ -16,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/poems", poemRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/upload", uploadRoutes);
 
 const __dirname = path.resolve();
