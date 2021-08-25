@@ -10,6 +10,12 @@ import Message from "./Message";
 import { useSelector } from "react-redux";
 
 const Poem = ({ poem }) => {
+  const [currentVote, setCurrentVote] = useState(poem.votes);
+  const [error, setError] = useState("");
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const components = {
     code({ node, inline, className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || "");
@@ -33,12 +39,6 @@ const Poem = ({ poem }) => {
     content = content.substring(0, 400) + "...";
   }
 
-  const [currentVote, setCurrentVote] = useState(poem.votes);
-  const [error, setError] = useState("");
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
   const upVoteHandler = () => {
     const upVote = async () => {
       try {
@@ -48,12 +48,16 @@ const Poem = ({ poem }) => {
             Authorization: `${userInfo ? `Bearer ${userInfo.token}` : null}`,
           },
         };
-        const { data } = await axios.put(
-          `/api/poems/${poem.id}/upvote`,
-          {},
-          config
-        );
-        setCurrentVote(data.votes);
+        if (userInfo) {
+          const { data } = await axios.put(
+            `/api/poems/${poem.id}/upvote`,
+            { userId: `${userInfo.id}` },
+            config
+          );
+          setCurrentVote(data.votes);
+        } else {
+          throw new Error("Please sign in");
+        }
       } catch (error) {
         setError(
           error.response && error.response.data.message
@@ -74,12 +78,17 @@ const Poem = ({ poem }) => {
             Authorization: `${userInfo ? `Bearer ${userInfo.token}` : null}`,
           },
         };
-        const { data } = await axios.put(
-          `/api/poems/${poem.id}/devote`,
-          {},
-          config
-        );
-        setCurrentVote(data.votes);
+
+        if (userInfo) {
+          const { data } = await axios.put(
+            `/api/poems/${poem.id}/devote`,
+            { userId: `${userInfo.id}` },
+            config
+          );
+          setCurrentVote(data.votes);
+        } else {
+          throw new Error("Please sign in");
+        }
       } catch (error) {
         setError(
           error.response && error.response.data.message

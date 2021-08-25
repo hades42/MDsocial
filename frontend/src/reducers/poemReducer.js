@@ -1,6 +1,7 @@
 import {
   ADD_POEM_FAIL,
   ADD_POEM_REQUEST,
+  ADD_POEM_RESET,
   ADD_POEM_SUCCESS,
   POEM_CREATE_COMMENT_FAIL,
   POEM_CREATE_COMMENT_REQUEST,
@@ -15,6 +16,7 @@ import {
   SINGLE_POEM_SUCCESS,
   SINGLE_POEM_UPVOTES_FAIL,
   SINGLE_POEM_VOTES,
+  SINGLE_POEM_VOTES_RESET,
 } from "../constants/poemConstant";
 
 export const poemListReducer = (state = { poems: [] }, action) => {
@@ -51,6 +53,8 @@ export const getSinglePoemVotes = (state = {}, action) => {
       return { error: action.payload };
     case SINGLE_POEM_DOWNVOTES_FAIL:
       return { error: action.payload };
+    case SINGLE_POEM_VOTES_RESET:
+      return {};
     default:
       return state;
   }
@@ -64,6 +68,8 @@ export const addNewPoemReducer = (state = {}, action) => {
       return { loading: false, data: action.payload };
     case ADD_POEM_FAIL:
       return { loading: false, error: action.payload };
+    case ADD_POEM_RESET:
+      return {};
     default:
       return state;
   }

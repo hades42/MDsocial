@@ -73,6 +73,10 @@
   text-align: center;
   cursor: pointer;
 }
+.activeUp,
+.activeDown {
+  color: #c62641;
+}
 .upVote:hover,
 .downVote:hover {
   color: #c62641;
@@ -104,4 +108,7 @@
 .readOn:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   color: white;
+}
+.footer {
+  margin-bottom: 1.5rem;
 }

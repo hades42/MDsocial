@@ -35,9 +35,10 @@ const getSinglePoemById = (req, res) => {
 // @access  Private
 const upVotePoemById = (req, res) => {
   const poemId = req.params.id;
+  const { userId } = req.body;
   const data = findPostById(poemId);
   if (data) {
-    const curr = upVoteById(poemId);
+    const curr = upVoteById(poemId, userId);
     res.json({
       id: poemId,
       votes: curr,
@@ -53,9 +54,10 @@ const upVotePoemById = (req, res) => {
 // @access  Private
 const downVotePoemById = (req, res) => {
   const poemId = req.params.id;
+  const { userId } = req.body;
   const data = findPostById(poemId);
   if (data) {
-    const curr = deVoteById(poemId);
+    const curr = deVoteById(poemId, userId);
     res.json({
       id: poemId,
       votes: curr,
@@ -81,7 +83,10 @@ const createNewPoem = (req, res) => {
       author,
       text,
       votes: 0,
+      upVotes: new Set(),
+      downVotes: new Set(),
       createdAt: new Date(),
+      comments: [],
     };
     createNewData(newData);
     res
