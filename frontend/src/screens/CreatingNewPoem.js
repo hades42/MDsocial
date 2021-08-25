@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addNewPoem } from "../actions/poemActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { ADD_POEM_RESET } from "../constants/poemConstant";
 
 const CreatingNewPoem = () => {
   const [title, setTitle] = useState("");
@@ -23,6 +24,10 @@ const CreatingNewPoem = () => {
   const { loading, error, data } = addPoem;
 
   useEffect(() => {
+    dispatch({ type: ADD_POEM_RESET });
+  }, []);
+
+  useEffect(() => {
     if (data) {
       if (!error) {
         setTitle("");
@@ -30,7 +35,7 @@ const CreatingNewPoem = () => {
         setText("");
       }
     }
-  }, [data, error]);
+  }, [data, error, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
