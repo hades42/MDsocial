@@ -6,9 +6,10 @@ import {
   SINGLE_POEM_REQUEST,
   SINGLE_POEM_FAIL,
   SINGLE_POEM_SUCCESS,
-  SINGLE_POEM_VOTES,
   SINGLE_POEM_UPVOTES_FAIL,
   SINGLE_POEM_DOWNVOTES_FAIL,
+  SINGLE_POEM_UPVOTES,
+  SINGLE_POEM_DOWNVOTES,
   ADD_POEM_REQUEST,
   ADD_POEM_SUCCESS,
   ADD_POEM_FAIL,
@@ -66,8 +67,12 @@ export const getSinglePoem = (poemId) => async (dispatch) => {
       payload: data,
     });
     dispatch({
-      type: SINGLE_POEM_VOTES,
-      payload: data.votes,
+      type: SINGLE_POEM_UPVOTES,
+      payload: data.upVotesQty,
+    });
+    dispatch({
+      type: SINGLE_POEM_DOWNVOTES,
+      payload: data.downVotesQty,
     });
   } catch (error) {
     dispatch({
@@ -101,8 +106,13 @@ export const upVoteSinglePoem = (poemId) => async (dispatch, getState) => {
       config
     );
     dispatch({
-      type: SINGLE_POEM_VOTES,
-      payload: data.votes,
+      type: SINGLE_POEM_UPVOTES,
+      payload: data.upVotesQty,
+    });
+
+    dispatch({
+      type: SINGLE_POEM_DOWNVOTES,
+      payload: data.downVotesQty,
     });
   } catch (error) {
     dispatch({
@@ -133,11 +143,17 @@ export const downVoteSinglePoem = (poemId) => async (dispatch, getState) => {
       },
       config
     );
+    console.log(data);
     dispatch({
-      type: SINGLE_POEM_VOTES,
-      payload: data.votes,
+      type: SINGLE_POEM_UPVOTES,
+      payload: data.upVotesQty,
+    });
+    dispatch({
+      type: SINGLE_POEM_DOWNVOTES,
+      payload: data.downVotesQty,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: SINGLE_POEM_DOWNVOTES_FAIL,
       payload:

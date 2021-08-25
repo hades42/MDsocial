@@ -2,18 +2,20 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {
-  getSinglePoemVotes,
   poemListReducer,
   singlePoemReducer,
   addNewPoemReducer,
   addNewCommentReducer,
+  upVotePoemReducer,
+  downVotePoemReducer,
 } from "./reducers/poemReducer";
 import { userLoginReducer, userRegisterReducer } from "./reducers/userReducer";
 
 const reducer = combineReducers({
   poemList: poemListReducer,
   singlePoem: singlePoemReducer,
-  singleVotes: getSinglePoemVotes,
+  upVotePoem: upVotePoemReducer,
+  downVotePoem: downVotePoemReducer,
   addPoem: addNewPoemReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
