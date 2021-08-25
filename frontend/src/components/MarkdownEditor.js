@@ -30,6 +30,40 @@ const MarkdownEditor = (props) => {
   const [theme, setTheme] = useState("nord");
   const [keybinding, setKeybinding] = useState("sublime");
   const [lineWrap, setLineWrap] = useState(true);
+  const [editorOnly, setEditorOnly] = useState(false);
+  const [renderOnly, setRenderOnly] = useState(false);
+  const [splitScreen, setSplitScreen] = useState(true);
+
+  const splitHandler = () => {
+    setSplitScreen(true);
+    setEditorOnly(false);
+    setRenderOnly(false);
+  };
+
+  const editorHandler = () => {
+    setSplitScreen(false);
+    setEditorOnly(true);
+    setRenderOnly(false);
+  };
+  const renderHandler = () => {
+    setSplitScreen(false);
+    setEditorOnly(false);
+    setRenderOnly(true);
+  };
+
+  let editorClass = classes.editor;
+  let markdownClass = classes.markdown;
+  if (splitScreen && !editorOnly && !renderOnly) {
+    editorClass = classes.editor;
+    markdownClass = classes.markdown;
+  } else if (editorOnly && !splitScreen && !renderOnly) {
+    editorClass = classes.expand;
+    markdownClass = classes.close;
+  } else {
+    editorClass = classes.close;
+    markdownClass = `${classes.markdown} ${classes.expand}`;
+  }
+
   const { text, onChange } = props;
   const changeHandler = (editor, data, value) => {
     onChange(value);
@@ -126,13 +160,23 @@ const MarkdownEditor = (props) => {
               </option>
             </select>
           </div>
+
+          <div className={classes.btnOption} onClick={splitHandler}>
+            Split Screen
+          </div>
+          <div className={classes.btnOption} onClick={editorHandler}>
+            Editor Only
+          </div>
+          <div className={classes.btnOption} onClick={renderHandler}>
+            Render Only
+          </div>
         </div>
       </div>
       <div className={classes.main} style={{ fontSize: `${font}px` }}>
         <ControlledEditor
           onBeforeChange={changeHandler}
           value={text}
-          className={classes.editor}
+          className={editorClass}
           options={{
             lineWrapping: lineWrap,
             lint: true,
@@ -145,7 +189,7 @@ const MarkdownEditor = (props) => {
         <ReactMarkdown
           components={components}
           children={text}
-          className={classes.markdown}
+          className={markdownClass}
           remarkPlugins={[remarkGfm]}
         />
       </div>
