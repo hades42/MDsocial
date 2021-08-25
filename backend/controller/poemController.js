@@ -41,7 +41,8 @@ const upVotePoemById = (req, res) => {
     const curr = upVoteById(poemId, userId);
     res.json({
       id: poemId,
-      votes: curr,
+      upVotesQty: curr[0],
+      downVotesQty: curr[1],
     });
   } else {
     res.status(404);
@@ -60,7 +61,8 @@ const downVotePoemById = (req, res) => {
     const curr = deVoteById(poemId, userId);
     res.json({
       id: poemId,
-      votes: curr,
+      upVotesQty: curr[0],
+      downVotesQty: curr[1],
     });
   } else {
     res.status(404);
@@ -82,7 +84,8 @@ const createNewPoem = (req, res) => {
       title,
       author,
       text,
-      votes: 0,
+      upVotesQty: 0,
+      downVotesQty: 0,
       upVotes: new Set(),
       downVotes: new Set(),
       createdAt: new Date(),
