@@ -5,10 +5,12 @@
   display: flex;
 }
 .editor {
+  display: block;
   width: 50%;
 }
 
 .markdown {
+  display: block;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif, Apple Color Emoji, Segoe UI Emoji;
   width: 50%;
@@ -18,6 +20,15 @@
   overflow: scroll;
   background-color: white;
 }
+
+.expand {
+  display: block;
+  width: 100%;
+}
+.close {
+  display: none;
+}
+
 .markdown h1,
 .markdown h2 {
   padding-bottom: 0.3em;
@@ -28,6 +39,7 @@
 }
 .controlMain {
   display: flex;
+  align-items: center;
   font-size: 16px;
   background-color: white;
   padding: 13px 10px;
@@ -62,4 +74,11 @@
 }
 .option select:hover {
   border: 1px solid black;
+}
+.btnOption {
+  margin-right: 1.5rem;
+  border: 1px solid #aaaaaa;
+  padding: 4px 15px;
+  cursor: pointer;
+  border-radius: 3px;
 }
