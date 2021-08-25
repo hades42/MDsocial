@@ -8,6 +8,10 @@ import {
   USER_REGISTER_FAIL,
 } from "../constants/userConstant";
 import axios from "axios";
+import {
+  ADD_POEM_RESET,
+  SINGLE_POEM_VOTES_RESET,
+} from "../constants/poemConstant";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -27,6 +31,12 @@ export const login = (email, password) => async (dispatch) => {
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
+    });
+    dispatch({
+      type: SINGLE_POEM_VOTES_RESET,
+    });
+    dispatch({
+      type: ADD_POEM_RESET,
     });
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
@@ -69,6 +79,12 @@ export const register = (name, email, password) => async (dispatch) => {
       payload: data,
     });
     localStorage.setItem("userInfo", JSON.stringify(data));
+    dispatch({
+      type: SINGLE_POEM_VOTES_RESET,
+    });
+    dispatch({
+      type: ADD_POEM_RESET,
+    });
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
