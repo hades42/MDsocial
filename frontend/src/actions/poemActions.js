@@ -35,9 +35,7 @@ export const listPoems = () => async (dispatch) => {
       },
     };
     const { data } = await axios.get("/api/poems", config);
-
     data.sort(sortDate);
-
     dispatch({ type: POEM_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
