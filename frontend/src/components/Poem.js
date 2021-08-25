@@ -10,7 +10,8 @@ import Message from "./Message";
 import { useSelector } from "react-redux";
 
 const Poem = ({ poem }) => {
-  const [currentVote, setCurrentVote] = useState(poem.votes);
+  const [currentUpVote, setCurrentUpVote] = useState(poem.upVotesQty);
+  const [currentDownVote, setCurrentDownVote] = useState(poem.downVotesQty);
   const [error, setError] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -54,7 +55,8 @@ const Poem = ({ poem }) => {
             { userId: `${userInfo.id}` },
             config
           );
-          setCurrentVote(data.votes);
+          setCurrentUpVote(data.upVotesQty);
+          setCurrentDownVote(data.downVotesQty);
         } else {
           throw new Error("Please sign in");
         }
@@ -85,7 +87,8 @@ const Poem = ({ poem }) => {
             { userId: `${userInfo.id}` },
             config
           );
-          setCurrentVote(data.votes);
+          setCurrentUpVote(data.upVotesQty);
+          setCurrentDownVote(data.downVotesQty);
         } else {
           throw new Error("Please sign in");
         }
@@ -120,7 +123,8 @@ const Poem = ({ poem }) => {
           <div onClick={upVoteHandler} className={classes.upVote}>
             <i className="fas fa-chevron-up"></i>
           </div>
-          <p>{currentVote}</p>
+          <p>{currentUpVote}</p>
+          <p>{currentDownVote * -1}</p>
           <div onClick={downVoteHandler} className={classes.downVote}>
             <i className="fas fa-chevron-down"></i>
           </div>

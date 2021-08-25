@@ -10,13 +10,15 @@ import {
   POEM_LIST_FAIL,
   POEM_LIST_REQUEST,
   POEM_LIST_SUCCESS,
-  SINGLE_POEM_DOWNVOTES_FAIL,
   SINGLE_POEM_FAIL,
   SINGLE_POEM_REQUEST,
   SINGLE_POEM_SUCCESS,
+  SINGLE_POEM_UPVOTES,
+  SINGLE_POEM_DOWNVOTES,
+  SINGLE_POEM_DOWNVOTES_FAIL,
   SINGLE_POEM_UPVOTES_FAIL,
-  SINGLE_POEM_VOTES,
-  SINGLE_POEM_VOTES_RESET,
+  SINGLE_POEM_UPVOTES_RESET,
+  SINGLE_POEM_DOWNVOTES_RESET,
 } from "../constants/poemConstant";
 
 export const poemListReducer = (state = { poems: [] }, action) => {
@@ -45,15 +47,26 @@ export const singlePoemReducer = (state = { poem: {} }, action) => {
   }
 };
 
-export const getSinglePoemVotes = (state = {}, action) => {
+export const upVotePoemReducer = (state = {}, action) => {
   switch (action.type) {
-    case SINGLE_POEM_VOTES:
+    case SINGLE_POEM_UPVOTES:
       return { votes: action.payload };
     case SINGLE_POEM_UPVOTES_FAIL:
-      return { error: action.payload };
+      return { votes: 0, error: action.payload };
+    case SINGLE_POEM_UPVOTES_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const downVotePoemReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SINGLE_POEM_DOWNVOTES:
+      return { votes: action.payload };
     case SINGLE_POEM_DOWNVOTES_FAIL:
-      return { error: action.payload };
-    case SINGLE_POEM_VOTES_RESET:
+      return { votes: 0, error: action.payload };
+    case SINGLE_POEM_DOWNVOTES_RESET:
       return {};
     default:
       return state;

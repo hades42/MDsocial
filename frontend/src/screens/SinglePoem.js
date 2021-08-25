@@ -46,9 +46,11 @@ const SinglePoem = ({ match }) => {
   const singlePoem = useSelector((state) => state.singlePoem);
   const { loading, error, poem } = singlePoem;
 
-  const singleVotes = useSelector((state) => state.singleVotes);
-  const { votes, error: errorVote } = singleVotes;
+  const upVote = useSelector((state) => state.upVotePoem);
+  const { votes: upVoteData, error: errorUpVote } = upVote;
 
+  const downVote = useSelector((state) => state.downVotePoem);
+  const { votes: downVoteData, error: errorDownVote } = downVote;
   // eslint-disable-next-line
   const [text, setText] = useState("");
   const [toggleComment, setToggleComment] = useState(false);
@@ -59,8 +61,8 @@ const SinglePoem = ({ match }) => {
   const downVoteHandler = () => {
     dispatch(downVoteSinglePoem(poemId));
   };
-  if (errorVote) {
-    alert(errorVote);
+  if (errorUpVote || errorDownVote) {
+    alert(errorUpVote || errorDownVote);
   }
 
   const previewHandler = () => {
@@ -106,7 +108,8 @@ const SinglePoem = ({ match }) => {
                     <div onClick={upVoteHandler} className={classes.upVote}>
                       <i className="fas fa-chevron-up"></i>
                     </div>
-                    <p>{votes}</p>
+                    <p>{upVoteData}</p>
+                    <p>{downVoteData ? +downVoteData * -1 : 0}</p>
                     <div onClick={downVoteHandler} className={classes.downVote}>
                       <i className="fas fa-chevron-down"></i>
                     </div>
@@ -139,7 +142,13 @@ const SinglePoem = ({ match }) => {
                         onClick={upVoteHandler}
                         className={classes.voteBtn}
                       >
-                        Vote
+                        Up Vote
+                      </button>
+                      <button
+                        onClick={downVoteHandler}
+                        className={classes.voteBtn}
+                      >
+                        Down Vote
                       </button>
                       <button
                         onClick={toggleCommentBox}
