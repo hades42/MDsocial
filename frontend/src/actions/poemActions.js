@@ -35,7 +35,9 @@ export const listPoems = () => async (dispatch) => {
       },
     };
     const { data } = await axios.get("/api/poems", config);
+
     data.sort(sortDate);
+
     dispatch({ type: POEM_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -89,10 +91,17 @@ export const upVoteSinglePoem = (poemId) => async (dispatch, getState) => {
     const config = {
       headers: {
         bob: "Bobalooba",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `${userInfo ? `Bearer ${userInfo.token}` : null}`,
       },
     };
-    const { data } = await axios.put(`/api/poems/${poemId}/upvote`, {}, config);
+
+    const { data } = await axios.put(
+      `/api/poems/${poemId}/upvote`,
+      {
+        userId: `${userInfo ? userInfo.id : ""}`,
+      },
+      config
+    );
     dispatch({
       type: SINGLE_POEM_VOTES,
       payload: data.votes,
@@ -116,10 +125,16 @@ export const downVoteSinglePoem = (poemId) => async (dispatch, getState) => {
     const config = {
       headers: {
         bob: "Bobalooba",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `${userInfo ? `Bearer ${userInfo.token}` : null}`,
       },
     };
-    const { data } = await axios.put(`/api/poems/${poemId}/devote`, {}, config);
+    const { data } = await axios.put(
+      `/api/poems/${poemId}/devote`,
+      {
+        userId: `${userInfo ? userInfo.id : ""}`,
+      },
+      config
+    );
     dispatch({
       type: SINGLE_POEM_VOTES,
       payload: data.votes,
@@ -146,7 +161,7 @@ export const addNewPoem = (poemData) => async (dispatch, getState) => {
     const config = {
       headers: {
         bob: "Bobalooba",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userInfo ? userInfo.token : ""}`,
       },
     };
     const { data } = await axios.post(`/api/poems`, poemData, config);
