@@ -11,7 +11,12 @@ const Footer = () => {
           </Col>
         </Row>
         <Row>
-          <Col className="text-center">Created by Van Nguyen</Col>
+          <Col className="text-center">
+            Created by{" "}
+            <a className={classes.linkGitHub} href="https://github.com/hades42">
+              Van Nguyen
+            </a>
+          </Col>
         </Row>
         <Row>
           <Col className="text-center">All right reserved</Col>

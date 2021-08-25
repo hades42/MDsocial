@@ -10,7 +10,8 @@ import {
 import axios from "axios";
 import {
   ADD_POEM_RESET,
-  SINGLE_POEM_VOTES_RESET,
+  SINGLE_POEM_DOWNVOTES_RESET,
+  SINGLE_POEM_UPVOTES_RESET,
 } from "../constants/poemConstant";
 
 export const login = (email, password) => async (dispatch) => {
@@ -33,7 +34,11 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     });
     dispatch({
-      type: SINGLE_POEM_VOTES_RESET,
+      type: SINGLE_POEM_UPVOTES_RESET,
+    });
+
+    dispatch({
+      type: SINGLE_POEM_DOWNVOTES_RESET,
     });
     dispatch({
       type: ADD_POEM_RESET,
@@ -80,7 +85,11 @@ export const register = (name, email, password) => async (dispatch) => {
     });
     localStorage.setItem("userInfo", JSON.stringify(data));
     dispatch({
-      type: SINGLE_POEM_VOTES_RESET,
+      type: SINGLE_POEM_UPVOTES_RESET,
+    });
+
+    dispatch({
+      type: SINGLE_POEM_DOWNVOTES_RESET,
     });
     dispatch({
       type: ADD_POEM_RESET,
