@@ -1,3 +1,10 @@
 .footer {
   color: #aaaaaa;
 }
+.linkGitHub {
+  color: #aaaaaa;
+}
+
+.linkGitHub:hover {
+  color: #c62641;
+}
