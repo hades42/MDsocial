@@ -9,8 +9,11 @@ import Message from "../components/Message";
 import { ADD_POEM_RESET } from "../constants/poemConstant";
 
 const CreatingNewPoem = () => {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
+  const [author, setAuthor] = useState(userInfo ? userInfo.name : "");
   const [text, setText] = useState("");
   const [imageLink, setImageLink] = useState("");
   const [uploading, setUploading] = useState(false);
